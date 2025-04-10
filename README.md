@@ -5,3 +5,5 @@
 ```bash 
 curl https://raw.githubusercontent.com/PromTehnolog/HA-Supervised/refs/heads/main/install_HA-Supervised.sh | bash
 ```
+
+После установки и создания аккаунта, при возникновении ошибки "Нет привелегированного доступа" - перезагрузите контроллер

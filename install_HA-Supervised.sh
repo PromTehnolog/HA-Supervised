@@ -39,8 +39,11 @@ if [[ ! -f /root/.ha_prepared ]]; then
     update-initramfs -u
   fi
   touch /root/.ha_prepared
-
+  
+  echo ""
+  echo "#######################################"
   echo "Reboot system and run this script again"
+  echo "#######################################"
   exit
 fi
 
@@ -54,9 +57,12 @@ echo "Installing homeassistant"
 wget -O homeassistant-supervised.deb https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
 apt install ./homeassistant-supervised.deb
 
+echo "###########################################"
 echo "Homeassistant Supervised installed, cleanup"
+echo "###########################################"
 rm os-agent*.deb
 rm homeassistant*.deb
+rm /root/.ha_prepared
 
 
 
