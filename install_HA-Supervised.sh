@@ -3,9 +3,9 @@
 echo "Installing Homeassistant Supervised"
 
 # Check for superuser 
-if [ "&EUID" -ne 0 ]; then
+if [ "&EUID" -ne "0" ]; then
   echo "Please run as Root"
-  exit
+  return
 fi 
 
 if [[ ! -f /root/.ha_prepared ]]; then
@@ -46,6 +46,9 @@ echo "Installing homeassistant"
 wget -O homeassistant-supervised.deb https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
 apt install ./homeassistant-supervised.deb
 
+echo "Homeassistant Supervised installed, cleanup"
+rm os-agent*.deb
+rm homeassistant*.deb
 
 
 
