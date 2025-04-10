@@ -25,9 +25,9 @@ if [[ ! -f /root/.ha_prepared ]]; then
   apt-get install -y apparmor jq wget curl udisks2 libglib2.0-bin network-manager dbus lsb-release systemd-timesyncd systemd-journal-remote cifs-utils nfs-common systemd-resolved
   echo "Dependencies installed"
 
-  echo "Installing docker"
-  curl -fsSl get.docker.com | sh
-  echo "Docker installed"
+  #echo "Installing docker"
+  #curl -fsSl get.docker.com | sh
+  #echo "Docker installed"
 
   # Check for extraargs
   echo "Check for apparmor and cgroups"
