@@ -3,9 +3,9 @@
 echo "Installing Homeassistant Supervised"
 
 # Check for superuser 
-if [ "&EUID" -ne "0" ]; then
-  echo "Please run as Root"
-  return
+if [ "&EUID" -ne 0 ] 
+  then echo "Please run as Root"
+  exit
 fi 
 
 if [[ ! -f /root/.ha_prepared ]]; then
@@ -34,6 +34,7 @@ if [[ ! -f /root/.ha_prepared ]]; then
   touch /root/.ha_prepared
 
   echo "Reboot system and run this script again"
+  exit
 fi
 
 
