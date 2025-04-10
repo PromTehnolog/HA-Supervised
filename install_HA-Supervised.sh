@@ -41,7 +41,7 @@ if [[ ! -f /root/.ha_prepared ]]; then
   touch /root/.ha_prepared
 
   echo "Reboot system and run this script again"
-  return
+  exit
 fi
 
 
