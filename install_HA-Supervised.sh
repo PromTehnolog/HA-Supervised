@@ -1,9 +1,15 @@
 #!/bin/bash 
 
+DEBIAN_FRONTEND=noninteractive
+MACHINE="qemuarm-64"
+APT_LISTCHANGES_FRONTEND=none 
+
+export DEBIAN_FRONTEND MACHINE APT_LISTCHANGES_FRONTEND
+
 echo "Installing Homeassistant Supervised"
 
 # Check for superuser 
-if [ "&EUID" -ne 0 ] 
+if [ $(id -u) -ne 0 ] 
   then echo "Please run as Root"
   exit
 fi 
@@ -12,11 +18,11 @@ if [[ ! -f /root/.ha_prepared ]]; then
 
   echo "Updating system"
   apt-get update 
-  apt-get dist-upgrade
+  apt-get upgrade -y
   echo "System updated"
 
   # Dependencies
-  apt-get install apparmor jq wget curl udisks2 libglib2.0-bin network-manager dbus lsb-release systemd-journal-remote cifs-utils nfs-common systemd-resolved -y
+  apt-get install -y apparmor jq wget curl udisks2 libglib2.0-bin network-manager dbus lsb-release systemd-timesyncd systemd-journal-remote cifs-utils nfs-common systemd-resolved
   echo "Dependencies installed"
 
   echo "Installing docker"
@@ -30,11 +36,12 @@ if [[ ! -f /root/.ha_prepared ]]; then
   else 
     echo "Adding extraargs"
     echo "extraargs=apparmor=1 security=apparmor systemd.unified_cgroup_hierarchy=0" >> /boot/orangepiEnv.txt
+    update-initramfs -u
   fi
   touch /root/.ha_prepared
 
   echo "Reboot system and run this script again"
-  exit
+  return
 fi
 
 
